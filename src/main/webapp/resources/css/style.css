@@ -1,0 +1,115 @@
+body {
+    background-color: #eee;
+    font: helvetica;
+}
+
+#container {
+    width: 900px;
+    background-color: #fff;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px;
+}
+
+h2 {
+	color: #28346d;
+}
+
+.green {
+    font-weight: bold;
+    color: green;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+label {
+    width: 100px;
+    display: inline-block;
+}
+
+#saveContact {
+	width: 450px;
+}
+
+#saveContact input[type="text"] {
+	margin: 2px;
+}
+
+.hide {
+    display: none;
+}
+
+.error {
+    color: red;
+    font-size: 0.8em;
+}
+
+table {
+/* 	margin: 0 auto; */
+    width: 900px;
+    background:#D3E4E5;
+    border:5px medium;
+    border-collapse:collapse;
+    color:#fff;
+    font:normal 12px verdana, arial, helvetica, sans-serif;
+/*     text-align: center; */
+}
+
+caption {
+    border:1px solid #28346d;
+    color: #28346d;
+    font-weight:bold;
+    letter-spacing:20px;
+    padding:6px 4px 8px 0px;
+    text-align:center;
+    text-transform:uppercase;
+}
+
+td, th {
+    color:#28346d;
+    padding:.4em;
+}
+
+tr {
+    border:1px dotted gray;
+}
+
+thead th, tfoot th {
+    background:#28346d;
+    color:#FFFFFF;
+    padding:3px 10px 3px 10px;
+    text-align:center;
+    text-transform:uppercase;
+}
+
+tfoot td {
+	text-align: center;
+}
+
+input[type="text"] {
+	width: 300px;
+	height: 20px;
+	padding: 2px;
+	margin: 2px;
+	margin-bottom: 30px;
+}
+
+textarea {
+	color: #03d327;
+	background: black;
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 7px;
+	border-radius: 7px;
+}
+
+#theJson {
+	color: #660092;
+}
+
+button, input[type="submit"] {
+	margin: 10px 0px;
+}
