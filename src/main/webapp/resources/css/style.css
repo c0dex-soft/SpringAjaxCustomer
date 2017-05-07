@@ -30,11 +30,11 @@ label {
     display: inline-block;
 }
 
-#saveContact {
+#saveCustomer {
 	width: 450px;
 }
 
-#saveContact input[type="text"] {
+#saveCustomer input[type="text"] {
 	margin: 2px;
 }
 

@@ -1,5 +1,6 @@
 package com.purplemagic.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -21,9 +22,14 @@ public class CustomerDaoImpl implements CustomerDao{
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void save(Customer customer) {
-		// TODO Auto-generated method stub
-		
+	public Customer add(Customer customer) {
+//		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
+		Serializable sId = session.save(customer);
+		session.close();
+		Long id = (Long) sId;
+		Customer rCustomer = findCustomerById(id);
+		return rCustomer;
 	}
 
 	@Override
@@ -36,8 +42,11 @@ public class CustomerDaoImpl implements CustomerDao{
 
 	@Override
 	public Customer findCustomerById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Customer.class);
+		criteria.add(Restrictions.idEq(id));
+		
+		return (Customer) criteria.uniqueResult();
 	}
 
 	@Override

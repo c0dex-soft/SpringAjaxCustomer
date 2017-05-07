@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +16,7 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 <script src="<c:url value="/resources/js/javascript.js"/>"></script>
 
 </head>
@@ -22,35 +24,39 @@
 	<div id="container">
 
 		<h2>Create New Costumer</h2>
-		<form id="saveContact">
+		<fmt:form id="saveCustomer" modelAttribute="customer">
 			<div>
-				<label for="firstNameInput">First Name</label> <input type="text"
-					name="firstName" id="firstNameInput" />
+				<label for="firstNameInput">First Name</label>
+				<input type="text" name="firstName" id="firstNameInput" />
 			</div>
 			<div>
-				<label for="lastNameInput">Last Name</label> <input type="text"
-					name="lastName" id="lastNameInput">
+				<label for="lastNameInput">Last Name</label>
+				<input type="text" name="lastName" id="lastNameInput"/>
 			</div>
 			<div>
-				<label for="emailInput">Email</label> <input type="text"
-					name="email" id="emailInput">
+				<label for="emailInput">Email</label>
+				<input type="text" name="email" id="emailInput"/>
 			</div>
 			<div>
-				<label for="phoneInput">Phone Number</label> <input type="text"
-					name="phone" id="phoneInput">
+				<label for="phoneInput">Phone Number</label>
+				<input type="text" name="phoneNumber" id="phoneInput"/>
 			</div>
 			<div>
-				<label for="dobInput">Date of Birth</label> <input type="text"
-					name="dob" id="dobInput">
+				<label for="dobInput">Date of Birth</label>
+				<input type="text" name="dob" id="dobInput"/>
 			</div>
 			<div>
 				<input id="submit" type="submit" value="Save Contact">
 			</div>
-		</form>
+		</fmt:form>
 
 		<hr>
-		<h2>List of Customers</h2>
-		<table id="contactTableResponse" class="table">
+			<h2 style="display: inline-block; height: 60px; margin: 0px">List of Customers</h2>
+		<div id="searchDiv" style="float: right;">
+<!-- 			<label id="searchText" style="color: #28346d; width: 50px" for="searchInput">Search</label> -->
+			<input id="searchInput" type="text" name="search" placeholder="Search customers by name...">
+		</div>
+		<table id="customerTableResponse" class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -63,15 +69,16 @@
 					<th>Delete</th>
 				</tr>
 			</thead>
+			<c:out value=""></c:out>
 			<tbody>
 				<c:forEach var="customer" items="${customers}">
 					<tr id="tr_${customer.id}">
 						<td>${customer.id}</td>
 						<td>${customer.firstName}</td>
-						<td>${customer.lastName}</td>
-						<td>${customer.email}</td>
-						<td>${customer.phoneNumber}</td>
-						<td id ="dob_${customer.id}" class="date" >${customer.dob}</td>
+						<td><c:out value="${not empty customer.lastName ? customer.lastName : 'null'}"></c:out></td>
+						<td><c:out value="${not empty customer.email ? customer.email : 'null'}"></c:out></td>
+						<td><c:out value="${not empty customer.phoneNumber ? customer.phoneNumber : 'null'}"></c:out></td>
+						<td id ="dob_${customer.id}" class="date" ><c:out value="${not empty customer.dob ? customer.dob : 'null'}"></c:out></td>
 						<td><input class="edit" type="button" value="Edit" /></td>
 						<td><input class="delete" type="button" value="Delete" /></td>
 					</tr>

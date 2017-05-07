@@ -19,22 +19,17 @@ public class CustomerServiceImpl implements CustomerService{
 	
 
 	@Override
-	public void save(Customer customer) {
-		// TODO Auto-generated method stub
-		
+	public Customer add(Customer customer) {
+		 Customer rCustomer = customerDao.add(customer);
+		 System.out.println("DATUM IZ BAZE: " +rCustomer.getDob());
+		 return rCustomer;
 	}
 
 	@Override
 	public List<Customer> findAll() {
 		List<Customer> customers = customerDao.findAll();
-		for(int i=0; i < customers.size(); i++) {
-			Customer currentCustomer = customers.get(i);
-			Date oldDob = currentCustomer.getDob();
-			
-			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.applyPattern("dd-MM-yyyy");
-			String newDob = sdf.format(oldDob);
-			System.out.println("Datum ["+i+"] -> " +newDob);
+		for (Customer customer : customers) {
+			System.out.println("DATUM IZ BAZE: " +customer.getDob());
 		}
 		return customers;
 	}

@@ -8,7 +8,7 @@ public interface CustomerService {
 
 	List<Customer> findAll();
 
-	void save(Customer customer);
+	Customer add(Customer customer);
 	
 	Customer update(Long id);
 
