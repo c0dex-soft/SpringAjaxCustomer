@@ -65,4 +65,13 @@ public class CustomerDaoImpl implements CustomerDao{
 		return null;
 	}
 
+	@Override
+	public List<Customer> findCustomersByName(String term) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Customer.class);
+		criteria.add(Restrictions.like("firstName", term+"%").ignoreCase());
+		List<Customer> customers = criteria.list();
+		return customers;
+	}
+
 }

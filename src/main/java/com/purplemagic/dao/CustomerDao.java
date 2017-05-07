@@ -14,6 +14,8 @@ public interface CustomerDao {
 
 	Customer findCustomerById(Long id);
 
+	List<Customer> findCustomersByName(String term);
+	
 	void delete(Long id);
 
 }

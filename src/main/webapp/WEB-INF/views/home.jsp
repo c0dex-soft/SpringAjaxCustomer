@@ -43,18 +43,20 @@
 			</div>
 			<div>
 				<label for="dobInput">Date of Birth</label>
-				<input type="text" name="dob" id="dobInput"/>
+				<input type="text" name="dob" id="dobInput" readonly="readonly"/>
 			</div>
 			<div>
 				<input id="submit" type="submit" value="Save Contact">
 			</div>
 		</fmt:form>
 
+
 		<hr>
 			<h2 style="display: inline-block; height: 60px; margin: 0px">List of Customers</h2>
 		<div id="searchDiv" style="float: right;">
 <!-- 			<label id="searchText" style="color: #28346d; width: 50px" for="searchInput">Search</label> -->
-			<input id="searchInput" type="text" name="search" placeholder="Search customers by name...">
+			<input id="search" type="text" name="search" placeholder="Search customers by name...">
+			<div id="info"></div>
 		</div>
 		<table id="customerTableResponse" class="table">
 			<thead>
@@ -70,7 +72,7 @@
 				</tr>
 			</thead>
 			<c:out value=""></c:out>
-			<tbody>
+			<tbody id="tbody">
 				<c:forEach var="customer" items="${customers}">
 					<tr id="tr_${customer.id}">
 						<td>${customer.id}</td>

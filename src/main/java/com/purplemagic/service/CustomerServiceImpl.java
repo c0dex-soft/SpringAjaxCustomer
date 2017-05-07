@@ -52,5 +52,10 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
 
+	@Override
+	public List<Customer> findCustomersByName(String term) {
+		return customerDao.findCustomersByName(term);
+	}
+
 
 }

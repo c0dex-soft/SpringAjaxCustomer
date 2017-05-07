@@ -12,42 +12,42 @@ body {
     box-shadow: 5px;
 }
 
-h2 {
+#container h2 {
 	color: #28346d;
 }
 
-.green {
+#container .green {
     font-weight: bold;
     color: green;
 }
 
-.message {
+#container .message {
     margin-bottom: 10px;
 }
 
-label {
+#container label {
     width: 100px;
     display: inline-block;
 }
 
-#saveCustomer {
+#container #saveCustomer {
 	width: 450px;
 }
 
-#saveCustomer input[type="text"] {
+#container #saveCustomer input[type="text"] {
 	margin: 2px;
 }
 
-.hide {
+#container .hide {
     display: none;
 }
 
-.error {
+#container .error {
     color: red;
     font-size: 0.8em;
 }
 
-table {
+#container table {
 /* 	margin: 0 auto; */
     width: 900px;
     background:#D3E4E5;
@@ -58,7 +58,7 @@ table {
 /*     text-align: center; */
 }
 
-caption {
+#container caption {
     border:1px solid #28346d;
     color: #28346d;
     font-weight:bold;
@@ -68,16 +68,16 @@ caption {
     text-transform:uppercase;
 }
 
-td, th {
+#container td, #container th {
     color:#28346d;
     padding:.4em;
 }
 
-tr {
+#container tr {
     border:1px dotted gray;
 }
 
-thead th, tfoot th {
+#container thead th, #container tfoot th {
     background:#28346d;
     color:#FFFFFF;
     padding:3px 10px 3px 10px;
@@ -85,11 +85,11 @@ thead th, tfoot th {
     text-transform:uppercase;
 }
 
-tfoot td {
+#container tfoot td {
 	text-align: center;
 }
 
-input[type="text"] {
+#container input[type="text"] {
 	width: 300px;
 	height: 20px;
 	padding: 2px;
@@ -97,7 +97,7 @@ input[type="text"] {
 	margin-bottom: 30px;
 }
 
-textarea {
+#container textarea {
 	color: #03d327;
 	background: black;
 	width: 100%;
@@ -106,10 +106,10 @@ textarea {
 	border-radius: 7px;
 }
 
-#theJson {
+#container #theJson {
 	color: #660092;
 }
 
-button, input[type="submit"] {
+#container button, #container input[type="submit"] {
 	margin: 10px 0px;
 }

@@ -13,6 +13,8 @@ public interface CustomerService {
 	Customer update(Long id);
 
 	Customer findCustomerById(Long id);
+	
+	List<Customer> findCustomersByName(String term);
 
 	void delete(Long id);
 

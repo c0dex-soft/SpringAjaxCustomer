@@ -26,10 +26,15 @@ $(document).ready(function () {
         });
  
         clearInputs();
-    })
+    });
+    
 
 	function clearInputs() {
 	    $('input[id*="Input"]').each(function () {
+	    	if ($(this).attr('id', 'dobInput')) {
+	    		$(this).css('background-color', '#faffbd');
+	    	}
+            $(this).css('autofill', 'white');
 	        $(this).val('');
 	    });
 	}
@@ -78,7 +83,7 @@ $(document).ready(function () {
 
 	});
 	
-/*	$("#dobInput").datepicker({
+	$("#dobInput").datepicker({
 		firstDay : 1,
 
 		showButtonPanel : true,
@@ -87,10 +92,39 @@ $(document).ready(function () {
 
 		constrainInput : true,
 		dateFormat: "dd-mm-yy",
+		maxDate: "today",
 
 		changeMonth : true,
 		changeYear : true
 
-	});*/
+	});
+	
+	var table = $('#tbody').html();
+	
+	$('#search').keyup(function (e) {
+	        var filter = $('#search').val();
+	        console.log(table);
+	
+	        if (filter.length > 0) {
+	        	$('tr[id*="tr_"]').remove();
+	            loadTable(filter);
+	        } else {
+	            $('tr[id*="tr_"]').remove();
+	            $('#customerTableResponse').last().append(table);
+	        }
+	});
+	 
+	 function loadTable(filter) {
+		    var url = "/spring-ajax-customer/search/" +filter;
+
+		    $('#tbody').load(url, function (response, status, xhr) {
+		        if (status == "error") {
+		            var msg = "Sorry but there was an error: ";
+		            $('#info').html(msg + xhr.status + " " +xhr.statusText);
+		        }
+		    });
+
+		    return false;
+		}
 
 });
