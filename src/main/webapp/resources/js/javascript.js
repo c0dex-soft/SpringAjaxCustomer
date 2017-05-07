@@ -1,8 +1,6 @@
 $(document).ready(function () {
     
-/*	$('#searchText').on("click", function(){
-		$("#searchInput").toggle("slide", 500);
-	});*/
+	var table = $('#tbody').html();
 
     $('#saveCustomer').submit(function (e) {
         e.preventDefault();
@@ -11,7 +9,7 @@ $(document).ready(function () {
         console.log(formData);
     	
         $.post('/spring-ajax-customer/add', $('#saveCustomer').serialize(), function (customer) {
-            $('#customerTableResponse').last().append(
+            $('#tbody').last().append(
                 '<tr id="tr_' +customer.id+ '">'+
                     '<td>' +customer.id+ '</td>'+
                     '<td>' +customer.firstName+ '</td>'+
@@ -23,8 +21,9 @@ $(document).ready(function () {
                     '<td><input class="delete" type="button" value="Delete" /></td>'+
 				'</tr>'
             );
+            document.location.reload();   
         });
- 
+        
         clearInputs();
     });
     
@@ -83,7 +82,9 @@ $(document).ready(function () {
 
 	});
 	
-	$("#dobInput").datepicker({
+
+	
+	$("#container #saveCustomer #dobInput").datepicker({
 		firstDay : 1,
 
 		showButtonPanel : true,
@@ -99,7 +100,6 @@ $(document).ready(function () {
 
 	});
 	
-	var table = $('#tbody').html();
 	
 	$('#search').keyup(function (e) {
 	        var filter = $('#search').val();
@@ -110,7 +110,7 @@ $(document).ready(function () {
 	            loadTable(filter);
 	        } else {
 	            $('tr[id*="tr_"]').remove();
-	            $('#customerTableResponse').last().append(table);
+	            $('#tbody').last().append(table);
 	        }
 	});
 	 

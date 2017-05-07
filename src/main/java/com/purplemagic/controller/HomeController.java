@@ -57,22 +57,6 @@ public class HomeController {
 		}
 	}
 
-/*	@RequestMapping(value = "/add", method=RequestMethod.POST)
-	public @ResponseBody Customer addCustomer(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("dob") String dob) {
-		
-		Customer customer = new Customer();
-		customer.setFirstName(firstName);
-		customer.setLastName(lastName);
-		customer.setEmail(email);
-		customer.setPhoneNumber(phoneNumber);
-		customer.setDob(null);
-
-		
-		Customer rCustomer = customerService.add(customer);
-		return rCustomer;
-	}*/
-	
 	@RequestMapping(value = "/add", method=RequestMethod.POST)
 	public @ResponseBody Customer addCustomer(@ModelAttribute("customer") Customer customer, BindingResult result) {
 		
