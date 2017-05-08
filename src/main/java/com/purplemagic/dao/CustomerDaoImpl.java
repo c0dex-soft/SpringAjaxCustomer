@@ -55,14 +55,17 @@ public class CustomerDaoImpl implements CustomerDao{
 		Query query = session.createQuery("delete from Customer where id=:id");
 		query.setLong("id", id);
 		int i = query.executeUpdate();
-		System.out.println("CustomerDAO returned value: "+i);
-
 	}
 
 	@Override
-	public Customer update(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer update(Customer customer) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			session.update(customer);
+			return customer;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

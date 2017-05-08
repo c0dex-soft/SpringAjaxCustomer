@@ -10,7 +10,7 @@ public interface CustomerDao {
 
 	Customer add(Customer customer);
 	
-	Customer update(Long id);
+	Customer update(Customer customer);
 
 	Customer findCustomerById(Long id);
 

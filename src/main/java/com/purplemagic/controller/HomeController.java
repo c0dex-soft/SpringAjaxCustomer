@@ -74,6 +74,14 @@ public class HomeController {
 		model.put("customers", customers);		
 		return new ModelAndView("search", model);
 	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public @ResponseBody Customer updateCustomer(@RequestParam("id") Long id, @ModelAttribute("customer") Customer customer) {
+		
+		Customer rCustomer = customerService.update(customer);
+		
+		return rCustomer;
+	}
 
 
 }

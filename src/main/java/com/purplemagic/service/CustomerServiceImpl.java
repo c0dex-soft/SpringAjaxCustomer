@@ -21,16 +21,12 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Customer add(Customer customer) {
 		 Customer rCustomer = customerDao.add(customer);
-		 System.out.println("DATUM IZ BAZE: " +rCustomer.getDob());
 		 return rCustomer;
 	}
 
 	@Override
 	public List<Customer> findAll() {
 		List<Customer> customers = customerDao.findAll();
-		for (Customer customer : customers) {
-			System.out.println("DATUM IZ BAZE: " +customer.getDob());
-		}
 		return customers;
 	}
 
@@ -47,14 +43,30 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer update(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer update(Customer customer) {
+		return customerDao.update(StringToNull(customer));
 	}
 
 	@Override
 	public List<Customer> findCustomersByName(String term) {
 		return customerDao.findCustomersByName(term);
+	}
+	
+	
+	private Customer StringToNull(Customer customer) {
+		if (customer.getFirstName().equals("")) {
+			customer.setFirstName(null);
+		}
+		if (customer.getLastName().equals("")) {
+			customer.setLastName(null);
+		}
+		if (customer.getEmail().equals("")) {
+			customer.setEmail(null);
+		}
+		if (customer.getPhoneNumber().equals("")) {
+			customer.setPhoneNumber(null);
+		}		
+		return customer;
 	}
 
 

@@ -5,9 +5,6 @@ $(document).ready(function () {
     $('#saveCustomer').submit(function (e) {
         e.preventDefault();
     	
-        var formData = $('#saveCustomer').serialize();
-        console.log(formData);
-    	
         $.post('/spring-ajax-customer/add', $('#saveCustomer').serialize(), function (customer) {
             $('#tbody').last().append(
                 '<tr id="tr_' +customer.id+ '">'+
@@ -17,7 +14,7 @@ $(document).ready(function () {
                     '<td>' +customer.email+ '</td>'+
                     '<td>' +customer.phoneNumber+ '</td>'+
                     '<td id="dob_' +customer.id+ '" class="date" >' +customer.dob+ '</td>'+
-                    '<td><input class="edit" type="button" value="Edit" /></td>'+
+                    '<td><button class="edit" type="button">Edit</button></td>'+
                     '<td><input class="delete" type="button" value="Delete" /></td>'+
 				'</tr>'
             );
@@ -84,9 +81,9 @@ $(document).ready(function () {
 	
 
 	
-	$("#container #saveCustomer #dobInput").datepicker({
+	$("#container #saveCustomer #dobInput, #dialog_dob").datepicker({
 		firstDay : 1,
-
+		yearRange: "-100:+0",
 		showButtonPanel : true,
 		currentText : "Today",
 		closeText : "Close",
@@ -100,6 +97,9 @@ $(document).ready(function () {
 
 	});
 	
+    $('#search').focusout(function() {
+    	document.location.reload(); 
+    });
 	
 	$('#search').keyup(function (e) {
 	        var filter = $('#search').val();
@@ -107,6 +107,7 @@ $(document).ready(function () {
 	
 	        if (filter.length > 0) {
 	        	$('tr[id*="tr_"]').remove();
+	        	 console.log(table);
 	            loadTable(filter);
 	        } else {
 	            $('tr[id*="tr_"]').remove();
@@ -114,17 +115,80 @@ $(document).ready(function () {
 	        }
 	});
 	 
-	 function loadTable(filter) {
+	function loadTable(filter) {
 		    var url = "/spring-ajax-customer/search/" +filter;
-
-		    $('#tbody').load(url, function (response, status, xhr) {
-		        if (status == "error") {
-		            var msg = "Sorry but there was an error: ";
-		            $('#info').html(msg + xhr.status + " " +xhr.statusText);
-		        }
-		    });
-
-		    return false;
-		}
+	
+	    $('#tbody').load(url, function (response, status, xhr) {
+	        if (status == "error") {
+	            var msg = "Sorry but there was an error: ";
+	            $('#info').html(msg + xhr.status + " " +xhr.statusText);
+	        }
+	    });
+	
+	    return false;
+	}
+	
+	$("#dialog-form").dialog({
+	      autoOpen: false,
+	      height: 370,
+	      width: 550,
+	      buttons: [
+	    	  {
+	    		  text: "Update",
+	    		  click: function() {
+	    			  $.post('/spring-ajax-customer/update?id=' +$("#dialog_id").text(), $('#update_form').serialize(), function (customer) {  			  			
+	    				$("#notification").html("<h2>DETAILS WAS UPDATED</h2>").css("color", "green");
+	    				console.log("Customer: " +customer.id+" | "+customer.firstName+" | "+customer.lastName+" | "+customer.email+" | "+customer.phoneNumber+" | "+customer.dob);  
+	    			  })
+	    			  	.fail(function() {
+	    			  		$("#notification").html("<h2>ERROR OCCURRED - DETAILS WASN'T UPDATED</h2>").css("color", "RED");
+	    			  	});
+	    		  }
+	    	  },
+	    	  {
+	    		  text: "Cancel",
+	    		  click: function() {
+	    			  document.location.reload(); 
+	    			  $(this).dialog("close");
+	    		  }
+	    	  }
+	      ],
+	      close: function() {
+	    	  document.location.reload(); 
+			  $(this).dialog("close");
+	      }
+	    });
+	
+	$(".edit").click(function() {
+		var tr = $(this).parent().parent();
+		var id, fname, lname, email, phone, dob;
+        tr.each(function( i ) {
+            $("td", this).each(function( j ) {
+                switch(j) {
+                    case 0: id = $(this).text();
+                            break;
+                    case 1: fname = $(this).text();
+                            break;
+                    case 2: lname = $(this).text();
+                            break;
+                    case 3: email = $(this).text();
+                            break;
+                    case 4: phone = $(this).text();
+                            break;
+                    case 5: dob = $(this).text();
+                            break;
+                }
+            });
+//            console.log("ID: "+id+" / First Name: "+fname+" / Last Name: "+lname+" / Email: "+email+" / Phone: "+phone+" / DoB: "+dob);
+            $("#dialog_id").text(id);
+            $("#dialog_firstName").val(fname);
+            $("#dialog_lastName").val(lname);
+            $("#dialog_email").val(email);
+            $("#dialog_phoneNumber").val(phone);
+            $("#dialog_dob").val(dob);
+        });
+		$("#dialog-form").dialog("open");
+	})
+	 
 
 });
