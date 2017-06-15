@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer add(Customer customer) {
-		 Customer rCustomer = customerDao.add(customer);
+		 Customer rCustomer = customerDao.add(stringToNull(customer));
 		 return rCustomer;
 	}
 
@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer update(Customer customer) {
-		return customerDao.update(StringToNull(customer));
+		return customerDao.update(stringToNull(customer));
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 	
 	
-	private Customer StringToNull(Customer customer) {
+	private Customer stringToNull(Customer customer) {
 		if (customer.getFirstName().equals("")) {
 			customer.setFirstName(null);
 		}

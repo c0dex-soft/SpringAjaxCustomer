@@ -24,7 +24,7 @@
 <body>
 	<div id="container">
 
-		<h2>Create New Costumer</h2>
+		<h2>Create New Customer</h2>
 		<form:form id="saveCustomer" modelAttribute="customer">
 			<div>
 				<label for="firstNameInput">First Name</label>
